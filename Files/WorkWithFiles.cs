@@ -18,14 +18,15 @@ namespace Files
         {
             using (StreamReader read = new StreamReader(path))
             {
+                int number;
                 string file = read.ReadToEnd();
                 interaction.ShowTextWriteLine(file);
-                interaction.ShowTextWriteLine("хотите дописать?");
+                interaction.ShowTextWriteLine("хотите дописать или перезаписать (дописать - 1,перезаписать - 2)?");
                 string input = interaction.TakeText();
-                bool append = true;
-                if (input == "да")
+                int.TryParse(input, out number);
+                if(number == 1)
                 {
-                    
+
                 }
             }
         }
