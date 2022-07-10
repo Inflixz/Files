@@ -20,25 +20,25 @@ namespace Files
         public void User()
         {
             WorkWithFiles workWithFiles = new WorkWithFiles();
-            int number;
-            string input = interaction.TakeText();
-            int.TryParse(input, out number);
-            while (number != 3)
+            int choise = interaction.TakeNumber();
+          
+            while (choise != 3)
             {
                 interaction.ShowTextWriteLine("Напшите путь вашего файла");
                 string pathgOfFile = interaction.TakeText();
-                switch (number)
+                if (choise == 1)
                 {
-                    case 1:
-                        {
-                            workWithFiles.CreateFile(pathgOfFile);
-                            break;
-                        }
-                    case 2:
-                        {
-                            workWithFiles.ReadFile(pathgOfFile);
-                            break;
-                        }
+                    workWithFiles.CreateFile(pathgOfFile);
+                }
+                else
+                {
+                    workWithFiles.ReadFile(pathgOfFile);
+                    interaction.ShowTextWriteLine("Хотите что-то сделать с файлом(закончить - 0, изменнения в файле - 1)?");
+                    int choose = interaction.TakeNumber();
+                    if (choose == 1)
+                    {
+                        workWithFiles.CreateFile(pathgOfFile);
+                    }
                 }
             }
         }

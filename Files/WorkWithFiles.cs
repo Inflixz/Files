@@ -20,54 +20,36 @@ namespace Files
             {
                 string file = read.ReadToEnd();
                 interaction.ShowTextWriteLine(file);
-                interaction.ShowTextWriteLine("Хотите что-то сделать с файлом(Перезаписать - 0, дописать файл - 1)?");
-                CreateFile(file);
             }
         }
         public void CreateFile(string pathgOfFile)
         {
+            bool append = true;
             if (File.Exists(pathgOfFile))///если такой файл уже существует
             {
-                interaction.ShowTextWriteLine("Такой файл уже есть! Перезаписать - 0," +
+                interaction.ShowTextWriteLine("Перезаписать - 0," +
                                               "дописать файл - 1");
-                string input = interaction.TakeText();
-                int number;
-                int.TryParse(input, out number);
-                switch(number)
+                int choose = interaction.TakeNumber();
+                if(choose == 0)/// ситуация номер 1: перезапись всего файла
                 {
-                    case 0:/// ситуация номер 1: перезапись всего файла
-                        {
-                            bool append = false;
-                            using (StreamWriter Writer = new StreamWriter(pathgOfFile, append))
-                            {
-                                interaction.ShowTextWriteLine("что будет в этом файле?");
-                                string containingsOfNewFile = interaction.TakeText();
-                                Writer.Write(containingsOfNewFile);
-                            }
-                            break;
-                        }
-                    case 1: ///ситуация номер 2: дозаписование старого файла
-                        {
-                            bool append = true;
-                            using (StreamWriter Writer = new StreamWriter(pathgOfFile, append))
-                            {
-                                interaction.ShowTextWriteLine("Что будет добавлено в этом файле?");
-                                string AddingOfFile = interaction.TakeText();
-                                Writer.Write(AddingOfFile);
-                            }
-                            break;
-                        }
+                    append = false;
+                    interaction.ShowTextWriteLine("что будет в этом файле?");
+                }
+                else///ситуация номер 2: дозаписование старого файла
+                {
+                    append = true;
+                    interaction.ShowTextWriteLine("Что будет добавлено в этом файле?");
                 }
             }
             else/// если такой файл не существует
             {
-                bool append = true;
-                using (StreamWriter Writer = new StreamWriter(pathgOfFile, append))
-                {
-                    interaction.ShowTextWriteLine("Что будет этом файле?");
-                    string containingsOfNewFile = interaction.TakeText();
-                    Writer.Write(containingsOfNewFile);
-                }
+                append = true;
+                interaction.ShowTextWriteLine("Что будет этом файле?");
+            }
+            using (StreamWriter Writer = new StreamWriter(pathgOfFile, append))
+            {
+                string containingsOfNewFile = interaction.TakeText();
+                Writer.Write(containingsOfNewFile);
             }
         }
     }
