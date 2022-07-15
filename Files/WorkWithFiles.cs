@@ -14,6 +14,7 @@ namespace Files
             interaction = new Interaction();
         }
         Interaction interaction;
+
         public void ReadFile(string path)
         {
             using (StreamReader read = new StreamReader(path))
@@ -43,7 +44,6 @@ namespace Files
             }
             else/// если такой файл не существует
             {
-                append = true;
                 interaction.ShowTextWriteLine("Что будет этом файле?");
             }
             using (StreamWriter Writer = new StreamWriter(pathgOfFile, append))
