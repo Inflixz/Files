@@ -28,7 +28,7 @@ namespace Files
                 string pathgOfFile = interaction.TakeText();
                 if (chooseOfACtion == 1)
                 {
-                    workWithFiles.CreateFile(pathgOfFile);
+                    workWithFiles.NewFile(pathgOfFile);
                 }
                 else
                 {
@@ -38,7 +38,7 @@ namespace Files
                     int choose = interaction.TakeNumber();
                     if (choose == 1)
                     {
-                        workWithFiles.CreateFile(pathgOfFile);
+                        workWithFiles.OldFile(pathgOfFile);
                     }
                 }
                 Menu();

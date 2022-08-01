@@ -23,15 +23,34 @@ namespace Files
                 interaction.ShowTextWriteLine(file);
             }
         }
-        public void CreateFile(string pathgOfFile)
+        public void FileChanger(string pathgOfFile, bool append)
+        {
+            using (StreamWriter Writer = new StreamWriter(pathgOfFile, append))
+            {
+                string containingsOfNewFile = interaction.TakeText();
+                Writer.Write(containingsOfNewFile);
+            }
+        }
+        public void NewFile(string pathgOfFile)
         {
             bool append = true;
             if (File.Exists(pathgOfFile))///если такой файл уже существует
             {
-                interaction.ShowTextWriteLine("Перезаписать - 0," +
-                                              "дописать файл - 1");
+                OldFile(pathgOfFile);
+            }
+            else
+            {
+                interaction.ShowTextWriteLine("Что будет этом файле?");
+                FileChanger(pathgOfFile, append);
+            }           
+        }
+        public void OldFile(string pathgOfFile)
+        {
+            bool append = true;
+            interaction.ShowTextWriteLine("Перезаписать - 0," +
+                                          "дописать файл - 1");
                 int choose = interaction.TakeNumber();
-                if(choose == 0)/// ситуация номер 1: перезапись всего файла
+                if (choose == 0)/// ситуация номер 1: перезапись всего файла
                 {
                     append = false;
                     interaction.ShowTextWriteLine("что будет в этом файле?");
@@ -41,16 +60,7 @@ namespace Files
                     append = true;
                     interaction.ShowTextWriteLine("Что будет добавлено в этом файле?");
                 }
-            }
-            else/// если такой файл не существует
-            {
-                interaction.ShowTextWriteLine("Что будет этом файле?");
-            }
-            using (StreamWriter Writer = new StreamWriter(pathgOfFile, append))
-            {
-                string containingsOfNewFile = interaction.TakeText();
-                Writer.Write(containingsOfNewFile);
-            }
+            FileChanger(pathgOfFile, append);
         }
     }
 }
