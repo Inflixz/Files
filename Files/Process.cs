@@ -19,6 +19,7 @@ namespace Files
         }
         public void ActionsOfUser()
         {
+            bool append = true;
             WorkWithFiles workWithFiles = new WorkWithFiles();
             int chooseOfACtion = interaction.TakeNumber();
             Menu();
@@ -26,9 +27,9 @@ namespace Files
             {
                 interaction.ShowTextWriteLine("Напшите путь вашего файла");
                 string pathgOfFile = interaction.TakeText();
-                if (chooseOfACtion == 1)
+                if (chooseOfACtion == 1) 
                 {
-                    workWithFiles.NewFile(pathgOfFile);
+                    workWithFiles.NewFile(pathgOfFile, append);
                 }
                 else
                 {
@@ -38,7 +39,7 @@ namespace Files
                     int choose = interaction.TakeNumber();
                     if (choose == 1)
                     {
-                        workWithFiles.OldFile(pathgOfFile);
+                        workWithFiles.OldFile(pathgOfFile, append);
                     }
                 }
                 Menu();

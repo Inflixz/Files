@@ -31,12 +31,11 @@ namespace Files
                 Writer.Write(containingsOfNewFile);
             }
         }
-        public void NewFile(string pathgOfFile)
+        public void NewFile(string pathgOfFile, bool append)
         {
-            bool append = true;
             if (File.Exists(pathgOfFile))///если такой файл уже существует
             {
-                OldFile(pathgOfFile);
+                OldFile(pathgOfFile, append);
             }
             else
             {
@@ -44,9 +43,8 @@ namespace Files
                 FileChanger(pathgOfFile, append);
             }           
         }
-        public void OldFile(string pathgOfFile)
+        public void OldFile(string pathgOfFile, bool append)
         {
-            bool append = true;
             interaction.ShowTextWriteLine("Перезаписать - 0," +
                                           "дописать файл - 1");
                 int choose = interaction.TakeNumber();
