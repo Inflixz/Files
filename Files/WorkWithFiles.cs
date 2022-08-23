@@ -31,34 +31,5 @@ namespace Files
                 Writer.Write(containingsOfNewFile);
             }
         }
-        public void NewFile(string pathgOfFile, bool append)
-        {
-            if (File.Exists(pathgOfFile))///если такой файл уже существует
-            {
-                OldFile(pathgOfFile, append);
-            }
-            else
-            {
-                interaction.ShowTextWriteLine("Что будет этом файле?");
-                FileChanger(pathgOfFile, append);
-            }           
-        }
-        public void OldFile(string pathgOfFile, bool append)
-        {
-            interaction.ShowTextWriteLine("Перезаписать - 0," +
-                                          "дописать файл - 1");
-                int choose = interaction.TakeNumber();
-                if (choose == 0)/// ситуация номер 1: перезапись всего файла
-                {
-                    append = false;
-                    interaction.ShowTextWriteLine("что будет в этом файле?");
-                }
-                else///ситуация номер 2: дозаписование старого файла
-                {
-                    append = true;
-                    interaction.ShowTextWriteLine("Что будет добавлено в этом файле?");
-                }
-            FileChanger(pathgOfFile, append);
-        }
     }
 }
